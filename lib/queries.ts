@@ -11,7 +11,7 @@ type DocLike = Record<string, any>
 /** All published projects, optionally filtered by category slug. */
 export const getProjects = cache(async (categorySlug?: string): Promise<DocLike[]> => {
   const p = await payload()
-  const where: Record<string, unknown> = {
+  const where: Record<string, any> = {
     status: { equals: 'published' },
   }
   if (categorySlug) {
