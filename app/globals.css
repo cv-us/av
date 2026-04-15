@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Tailwind v4 dark-mode variant bound to a .dark class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* -----------------------------------------------------------------
+   Design tokens — warm, editorial, gallery-inspired.
+   Light mode = warm paper, never pure white.
+   Dark mode  = warm near-black, never pure black.
+   ----------------------------------------------------------------- */
+
+:root {
+  --bg: #FAF8F4;
+  --surface: #FFFFFF;
+  --ink: #1A1714;
+  --muted: #6B645C;
+  --border: #E8E3DB;
+  --accent: #B85C38;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark {
+  --bg: #0E0D0C;
+  --surface: #171614;
+  --ink: #EDE8E0;
+  --muted: #8A847B;
+  --border: #2A2824;
+  --accent: #D97F4E;
+}
+
+/* Expose tokens to Tailwind v4 */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+/* -----------------------------------------------------------------
+   Base
+   ----------------------------------------------------------------- */
+
+html {
+  color-scheme: light dark;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Focus rings — accent at 50% opacity, 2px offset */
+:focus-visible {
+  outline: 2px solid color-mix(in oklch, var(--accent) 50%, transparent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Utilities */
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+}
+
+.measure {
+  max-width: 65ch;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 1rem;
+}
+
+/* Reduce motion: honour user preference globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
