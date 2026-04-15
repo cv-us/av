@@ -42,7 +42,7 @@ export function ModelViewer({
       )}
       style={{ aspectRatio: '4 / 3' }}
     >
-      {/* @ts-expect-error — custom element, not in React's JSX types */}
+      {/* @ts-ignore — custom element, not in React's JSX types */}
       <model-viewer
         src={src}
         alt={alt}

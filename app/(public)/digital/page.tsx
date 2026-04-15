@@ -32,7 +32,7 @@ export default async function DigitalPage() {
         title="Digital Art"
         intro="Concept art, illustrations, and paintover studies bridging traditional foundations with the 3D work."
       />
-      {/* @ts-expect-error — Payload doc shape is loose */}
+      {/* @ts-ignore — Payload doc shape is loose */}
       <ProjectGrid projects={projects} />
     </>
   )

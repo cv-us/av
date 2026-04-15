@@ -32,7 +32,7 @@ export default async function DrawingPage() {
         title="Traditional & Life Drawing"
         intro="Gesture, sustained figure, anatomy studies, master copies, and sketchbook spreads. Disney has run in-house life drawing classes since 1932 — fundamentals are not optional."
       />
-      {/* @ts-expect-error — Payload doc shape is loose */}
+      {/* @ts-ignore — Payload doc shape is loose */}
       <ProjectGrid
         projects={projects}
         className="sm:grid-cols-2 lg:grid-cols-4"

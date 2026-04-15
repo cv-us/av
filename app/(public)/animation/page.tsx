@@ -32,7 +32,7 @@ export default async function AnimationPage() {
         title="3D Animation"
         intro="Character acting, body mechanics, creature, and dialogue shots. Each project links to a detail page with shot breakdown, software, and credits for any non-self-made rigs."
       />
-      {/* @ts-expect-error — Payload doc shape is loose */}
+      {/* @ts-ignore — Payload doc shape is loose */}
       <ProjectGrid projects={projects} />
     </>
   )

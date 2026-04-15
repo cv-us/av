@@ -32,7 +32,7 @@ export default async function ModelingPage() {
         title="3D Modeling"
         intro="Characters, props, and environments. Each project includes turntables (shaded, wireframe, textured, deformation passes) and — where available — an interactive GLB you can rotate in the browser."
       />
-      {/* @ts-expect-error — Payload doc shape is loose */}
+      {/* @ts-ignore — Payload doc shape is loose */}
       <ProjectGrid projects={projects} />
     </>
   )

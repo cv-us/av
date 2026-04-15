@@ -102,7 +102,7 @@ export default async function LandingPage() {
           </Link>
         </FadeUp>
 
-        {/* @ts-expect-error — Payload doc shape is loose */}
+        {/* @ts-ignore — Payload doc shape is loose */}
         <ProjectGrid projects={featured} variant="editorial" />
       </section>
 
