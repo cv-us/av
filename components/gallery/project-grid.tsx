@@ -4,15 +4,10 @@ import { StaggerGrid, StaggerItem } from '@/components/motion/stagger-grid'
 import { ProjectCard } from './project-card'
 import { cn } from '@/lib/utils'
 
-type Project = {
-  id: string
-  slug: string
-  title: string
-  subtitle?: string
-  role?: string
-  year?: number
-  coverMedia?: unknown
-}
+// Loose shape — Payload's generated collection types include many fields
+// we don't use here; keeping this permissive avoids cast-at-callsite noise.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Project = Record<string, any> & { id: string | number }
 
 export function ProjectGrid({
   projects,

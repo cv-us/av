@@ -6,14 +6,8 @@ import { R2Image } from '@/components/media/r2-image'
 import { resolveMedia } from '@/lib/media'
 import { cn } from '@/lib/utils'
 
-type Project = {
-  slug: string
-  title: string
-  subtitle?: string
-  role?: string
-  year?: number
-  coverMedia?: unknown
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Project = Record<string, any>
 
 export function ProjectCard({
   project,

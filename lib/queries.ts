@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'server-only'
 import { cache } from 'react'
 import { payload } from './payload'
 
+// Payload generates strict types after first dev run via
+// `payload generate:types`. Until that file exists we use loose shapes
+// so build-time TS is happy and runtime behaviour is unchanged.
+type DocLike = Record<string, any>
+
 /** All published projects, optionally filtered by category slug. */
-export const getProjects = cache(async (categorySlug?: string) => {
+export const getProjects = cache(async (categorySlug?: string): Promise<DocLike[]> => {
   const p = await payload()
   const where: Record<string, unknown> = {
     status: { equals: 'published' },
@@ -27,11 +33,11 @@ export const getProjects = cache(async (categorySlug?: string) => {
     limit: 200,
     depth: 2,
   })
-  return res.docs
+  return res.docs as DocLike[]
 })
 
 /** Featured projects (for the landing page). */
-export const getFeaturedProjects = cache(async (limit = 6) => {
+export const getFeaturedProjects = cache(async (limit = 6): Promise<DocLike[]> => {
   const p = await payload()
   const res = await p.find({
     collection: 'projects',
@@ -45,11 +51,11 @@ export const getFeaturedProjects = cache(async (limit = 6) => {
     limit,
     depth: 2,
   })
-  return res.docs
+  return res.docs as DocLike[]
 })
 
 /** Single project by slug. Returns null if not found or not published. */
-export const getProjectBySlug = cache(async (slug: string) => {
+export const getProjectBySlug = cache(async (slug: string): Promise<DocLike | null> => {
   const p = await payload()
   const res = await p.find({
     collection: 'projects',
@@ -62,7 +68,7 @@ export const getProjectBySlug = cache(async (slug: string) => {
     limit: 1,
     depth: 2,
   })
-  return res.docs[0] ?? null
+  return (res.docs[0] as DocLike) ?? null
 })
 
 /** Slugs for every published project (used by sitemap + static params). */
@@ -80,7 +86,7 @@ export const getAllProjectSlugs = cache(async () => {
 })
 
 /** All visible categories. */
-export const getCategories = cache(async () => {
+export const getCategories = cache(async (): Promise<DocLike[]> => {
   const p = await payload()
   const res = await p.find({
     collection: 'categories',
@@ -88,11 +94,11 @@ export const getCategories = cache(async () => {
     sort: 'sortOrder',
     limit: 50,
   })
-  return res.docs
+  return res.docs as DocLike[]
 })
 
 /** Site-wide settings (tagline, bio, reel, résumé, links). */
-export const getSiteSettings = cache(async () => {
+export const getSiteSettings = cache(async (): Promise<DocLike> => {
   const p = await payload()
-  return p.findGlobal({ slug: 'siteSettings', depth: 2 })
+  return (await p.findGlobal({ slug: 'siteSettings', depth: 2 })) as DocLike
 })
