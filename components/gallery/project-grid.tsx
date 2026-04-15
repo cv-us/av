@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 // Loose shape — Payload's generated collection types include many fields
 // we don't use here; keeping this permissive avoids cast-at-callsite noise.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Project = Record<string, any> & { id: string | number }
+type Project = Record<string, any>
 
 export function ProjectGrid({
   projects,
