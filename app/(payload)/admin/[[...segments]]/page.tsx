@@ -13,7 +13,7 @@ export const generateMetadata = ({
   params,
   searchParams,
 }: Args): Promise<Metadata> =>
-  generatePageMetadata({ config, params, searchParams })
+  generatePageMetadata({ config, params, searchParams } as any)
 
 const Page = ({ params, searchParams }: Args) =>
   RootPage({ config, params, searchParams, importMap } as any)
